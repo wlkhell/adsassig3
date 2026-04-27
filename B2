@@ -1,0 +1,30 @@
+#include <algorithm>
+using namespace std;
+struct MinMax {
+    int min;
+    int max;
+};
+MinMax getMinMax(int arr[], int low, int high) {
+    MinMax res, left, right;
+    if (low == high) {
+        res.min = arr[low];
+        res.max = arr[low];
+        return res;
+    }
+    if (high == low + 1) {
+        if (arr[low] < arr[high]) {
+            res.min = arr[low];
+            res.max = arr[high];
+        } else {
+            res.min = arr[high];
+            res.max = arr[low];
+        }
+        return res;
+    }
+    int mid = low + (high - low) / 2;
+    left = getMinMax(arr, low, mid);
+    right = getMinMax(arr, mid + 1, high);
+    res.min = min(left.min, right.min);
+    res.max = max(left.max, right.max);
+    return res;
+}
