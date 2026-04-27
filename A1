@@ -1,14 +1,16 @@
+#include <algorithm>
+using namespace std;
 int partition(int arr[], int low, int high) {
     int pivot = arr[low];
-    int i = low - 1, j = high + 1;
+    int i = low - 1;
+    int j = high + 1;
     while (true) {
         do { i++; } while (arr[i] < pivot);
         do { j--; } while (arr[j] > pivot);
         if (i >= j) return j;
-        std::swap(arr[i], arr[j]);
+        swap(arr[i], arr[j]);
     }
 }
-
 void quickSort(int arr[], int low, int high) {
     if (low < high) {
         int p = partition(arr, low, high);
